@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace MyApp // Note: actual namespace depends on the project name.
 {
@@ -15,7 +17,8 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
         public static int RevNumber(int number)
         {
-            //if (number > int.MaxValue || number < int.MinValue)            //{
+            //if (number > int.MaxValue || number < int.MinValue)
+            //{
             //    return 0;
             //}
 
@@ -70,6 +73,58 @@ namespace MyApp // Note: actual namespace depends on the project name.
             // Console.WriteLine(numStringReverse);
 
 
+        }
+
+        public static bool isValid(string s)
+        {
+            if (s.Length % 2 != 0)
+            {
+                return false;
+            }
+
+            Hashtable ht = new Hashtable();
+            ht.Add('(', ')');
+            ht.Add('[', ']');
+            ht.Add('{', '}');
+
+
+            Stack<char> stack = new Stack<char>();
+            foreach (var i in s)
+            {
+                if (i == '(' || i == '[' || i == '{')
+                {
+                    stack.Push(i);
+                }
+                else
+                {
+                    if (stack.Count > 0)
+                    {
+                        //peek the stack
+                        var topChar = stack.Peek();
+                        //check value against i
+                        //if matches then pop off the stack
+                        if ((char)ht[topChar] == i)
+                        {
+                            stack.Pop();
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+
+                    //else return false
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            if (stack.Count > 0)
+            {
+                return false;
+            }
+            return true;
         }
     }
 
