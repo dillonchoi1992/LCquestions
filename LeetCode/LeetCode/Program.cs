@@ -126,6 +126,39 @@ namespace MyApp // Note: actual namespace depends on the project name.
             }
             return true;
         }
+
+        //Given an array of integers nums and an integer target,
+        //return indices of the two numbers such that they add up to target.
+
+        //
+        public int[] TwoSum(int[] nums, int target)
+        {
+            Dictionary<int, int> keyValuePairs = new Dictionary<int, int>();
+
+            for(int i = 0; i < nums.Length; i++)
+            {
+                //var answer = new int[2];
+                //check to see if within the dictionary
+                //(target - the current num) is there
+                if(keyValuePairs.TryGetValue(target - nums[i], out int index))
+                {
+                    //if it is there then we return the value in the dictionary
+                    //and the current i 
+                    return new int[] { index, i };
+                }
+                else if(!keyValuePairs.ContainsKey(nums[i]))
+                {
+                    //else we add the num value, i to the dictionary
+                    keyValuePairs.Add(nums[i], i);
+                }
+                
+                
+            }
+            return null;
+
+
+        }
+
     }
 
     
