@@ -127,10 +127,6 @@ namespace MyApp // Note: actual namespace depends on the project name.
             return true;
         }
 
-        //Given an array of integers nums and an integer target,
-        //return indices of the two numbers such that they add up to target.
-
-        //
         public int[] TwoSum(int[] nums, int target)
         {
             Dictionary<int, int> keyValuePairs = new Dictionary<int, int>();
@@ -157,6 +153,25 @@ namespace MyApp // Note: actual namespace depends on the project name.
             return null;
 
 
+        }
+
+        public int SearchInsert(int[] nums, int target)
+        {
+            //Binary search, left and right and start at middle 
+            int left = 0;
+            int right = nums.Length - 1;
+
+            while(left <= right)
+            {
+                int mid = left + (right - left) / 2;
+                if(nums[mid] == target) return mid;
+                if(nums[mid] < target) left = mid + 1;
+                if(nums[mid] > target) right = mid - 1;
+            }
+
+            return left;
+            // put them in asceding order
+            // if int does not return anything grab index instead
         }
 
     }
